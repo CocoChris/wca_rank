@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wca.rank.dao.IntentKeywordMapper" >
+  <resultMap id="BaseResultMap" type="com.wca.rank.pojo.IntentKeywordPojo" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="keyword" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="weight_QA" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="weight_diagnosis" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="weight_monitor" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, keyword, weight_QA, weight_diagnosis, weight_monitor
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from _chatops_intent_keyword
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from _chatops_intent_keyword
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wca.rank.pojo.IntentKeywordPojo" >
+    insert into _chatops_intent_keyword (id, keyword, weight_QA, 
+      weight_diagnosis, weight_monitor)
+    values (#{id,jdbcType=INTEGER}, #{keyword,jdbcType=VARCHAR}, #{weightQa,jdbcType=DOUBLE}, 
+      #{weightDiagnosis,jdbcType=DOUBLE}, #{weightMonitor,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wca.rank.pojo.IntentKeywordPojo" >
+    insert into _chatops_intent_keyword
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="weightQa != null" >
+        weight_QA,
+      </if>
+      <if test="weightDiagnosis != null" >
+        weight_diagnosis,
+      </if>
+      <if test="weightMonitor != null" >
+        weight_monitor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="weightQa != null" >
+        #{weightQa,jdbcType=DOUBLE},
+      </if>
+      <if test="weightDiagnosis != null" >
+        #{weightDiagnosis,jdbcType=DOUBLE},
+      </if>
+      <if test="weightMonitor != null" >
+        #{weightMonitor,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wca.rank.pojo.IntentKeywordPojo" >
+    update _chatops_intent_keyword
+    <set >
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="weightQa != null" >
+        weight_QA = #{weightQa,jdbcType=DOUBLE},
+      </if>
+      <if test="weightDiagnosis != null" >
+        weight_diagnosis = #{weightDiagnosis,jdbcType=DOUBLE},
+      </if>
+      <if test="weightMonitor != null" >
+        weight_monitor = #{weightMonitor,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wca.rank.pojo.IntentKeywordPojo" >
+    update _chatops_intent_keyword
+    set keyword = #{keyword,jdbcType=VARCHAR},
+      weight_QA = #{weightQa,jdbcType=DOUBLE},
+      weight_diagnosis = #{weightDiagnosis,jdbcType=DOUBLE},
+      weight_monitor = #{weightMonitor,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
